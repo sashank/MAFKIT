@@ -1,0 +1,173 @@
+MAFKIT USB PHONE SCANNER - INSTRUCTION MANUAL
+============================================
+
+PURPOSE
+-------
+MAFKit scans Android applications from a laptop over USB using Android Debug Bridge (ADB). It reads app/package metadata, checks requested and granted permissions, checks active accessibility/device-admin indicators, copies APK files that Android exposes to ADB, and analyzes those APKs offline.
+
+The scanner does not install itself on the phone, does not require root, and does not execute the APKs it scans. It is read-only by default. Removing an app is a separate command that requires typing the exact package name.
+
+IMPORTANT LIMITATIONS
+---------------------
+- A score is a heuristic indicator, not a malware verdict or a guarantee that an app is safe.
+- Ordinary ADB cannot read protected app-private data, such as private app databases, messages, or files under protected /data/data directories.
+- A static APK scan does not monitor what an app does while running.
+- If an APK cannot be pulled or parsed, that app will be marked partial or metadata-only. Do not interpret incomplete coverage as a clean result.
+- APKs and scan reports disclose information about the phone's installed apps. Protect the output folder.
+
+WHAT YOU NEED
+-------------
+1. A laptop with Python 3.10 or newer.
+2. Android SDK Platform-Tools installed, including the adb command.
+3. A USB data cable.
+4. An Android phone you own or are authorized to inspect.
+
+Optional: install Androguard to improve offline APK manifest and signing-certificate parsing:
+
+    python -m pip install androguard
+
+The scanner can still read package permission state from Android when Androguard is not installed.
+
+PART 1: PREPARE THE ANDROID PHONE
+---------------------------------
+Menu names can vary by Android manufacturer and version.
+
+1. Open Settings, then About phone.
+2. Find Build number. It may be under Software information.
+3. Tap Build number seven times. Enter the phone PIN if requested. Android should report that Developer options are enabled.
+4. Return to Settings and open System, then Developer options. Some phones show Developer options directly in Settings.
+5. Turn on USB debugging.
+6. Do NOT enable OEM unlocking, bootloader unlocking, or USB installation for this scan.
+7. Connect the phone to the laptop with a data-capable USB cable and unlock the phone.
+8. When Android asks whether to allow USB debugging, verify that you trust this laptop and accept its RSA fingerprint. Do not authorize an unfamiliar computer.
+
+PART 2: VERIFY THE USB CONNECTION
+---------------------------------
+Open a terminal on the laptop and run:
+
+    adb devices -l
+
+Expected result: the phone appears with state "device".
+
+If the state is "unauthorized":
+- Unlock the phone.
+- Look for the USB debugging authorization prompt and accept it only if this is your laptop.
+- Run "adb devices -l" again.
+
+If no device appears:
+- Check that the USB cable supports data, not just charging.
+- Try another USB port or cable.
+- Keep the phone unlocked while connecting.
+- On Windows, install the device manufacturer's USB driver if necessary.
+- On Linux, check that the Android USB permissions/udev rules allow your account to access the device.
+
+If more than one authorized device is attached, note the serial shown by "adb devices -l". The scanner will require an explicit --serial selection.
+
+PART 3: RUN A SCAN
+------------------
+Open a terminal and first change into the parent directory of the scanner checkout. On this computer, the scanner is in ~/Downloads/MAFKIT-main, so run:
+
+    cd ~/Downloads
+    python -m 'MAFKIT-main' scan-phone --out phone-scan-output
+
+Do not run "python -m MAFKIT" from your home directory for this copy. That command selects the separate ~/MAFKIT checkout, which does not contain the phone scanner.
+
+For a scan of third-party apps only:
+
+    cd ~/Downloads
+    python -m 'MAFKIT-main' scan-phone --third-party-only --out phone-scan-output
+
+To select one phone when multiple authorized phones are attached:
+
+    cd ~/Downloads
+    python -m 'MAFKIT-main' scan-phone --serial DEVICE_SERIAL --out phone-scan-output
+
+To test the process on only the first few apps:
+
+    cd ~/Downloads
+    python -m 'MAFKIT-main' scan-phone --max-apps 5 --out phone-scan-output
+
+Replace DEVICE_SERIAL with the exact serial printed by "adb devices -l". The app limit is useful for a quick test; it is not a complete scan.
+
+The scan may take several minutes, depending on the number and size of installed applications. Keep the cable connected, keep the phone awake/unlocked if it prompts you, and do not disconnect ADB while the scan is running.
+
+PART 4: FIND AND READ THE REPORTS
+---------------------------------
+The output directory contains:
+
+- phone_scan.md: readable scan summary and a detailed section for every app.
+- phone_scan.json: complete machine-readable results.
+- pulled_apks/: APK files copied from the phone.
+- .scan_work/: temporary static-analysis files.
+
+Open phone_scan.md first. For each app, review:
+
+- Score and assessment band.
+- Coverage status and warnings.
+- Requested permissions and whether Android reports them granted.
+- Active accessibility-service and device-administrator indicators.
+- Static findings and their evidence.
+- APK SHA-256 fingerprints.
+
+SCORING GUIDE
+-------------
+Scores range from 0 to 100. Higher means fewer weighted risk indicators were observed; it does NOT mean the app is certified safe.
+
+- 85-100: Low observed risk. This is not a safety certification.
+- 65-84: Review the permissions and whether the app's purpose requires them.
+- 35-64: Elevated. Investigate before trusting the app.
+- 0-34: High. Prioritize manual review.
+
+Risk points may be added for granted sensitive permissions, static API/string capabilities, packed-code indicators, and active accessibility/device-admin state. A permission that was requested but is not granted is listed but does not receive the granted-permission penalty. Multiple indicators can describe overlapping behavior. Read the explanation for each factor; the score is not a probability.
+
+No weighted indicators does not prove that an application is benign. Some malicious behavior can be hidden, encrypted, downloaded later, or only active in a particular situation. Bundled libraries and unused code can also cause false alarms.
+
+PART 5: OPTIONAL APP REMOVAL
+----------------------------
+Do not remove an app only because it has a low score. First confirm that you recognize the package and that it is unwanted. Removing an app can break phone functions or cause data loss.
+
+To request removal of one third-party app for Android user 0:
+
+    cd ~/Downloads
+    python -m 'MAFKIT-main' remove-app com.example.package
+
+Replace com.example.package with the exact package name shown in the report. To select a phone when multiple devices are attached:
+
+    cd ~/Downloads
+    python -m 'MAFKIT-main' remove-app --serial DEVICE_SERIAL com.example.package
+
+MAFKit checks Android's third-party package list and refuses to remove system apps. Before it runs the uninstall request, it asks you to type the exact package name. If the name does not match, it cancels without changing the phone.
+
+Android removes the application's private data for that user as part of uninstalling it. The command does not delete arbitrary files from shared storage, photos, downloads, or other apps. Back up information you need before removal. If you do not want to proceed, press Ctrl+C or enter anything other than the exact package name.
+
+PART 6: SECURE THE PHONE AFTER SCANNING
+---------------------------------------
+1. Disconnect the USB cable.
+2. Turn off USB debugging in Developer options.
+3. If the laptop should no longer be trusted, select Revoke USB debugging authorizations in Developer options.
+4. You may turn Developer options off.
+5. Store the report and pulled APKs securely. Delete the output directory from the laptop when it is no longer needed and consistent with your evidence-retention needs.
+
+TROUBLESHOOTING
+---------------
+"adb: command not found"
+    Install Android SDK Platform-Tools and add its platform-tools directory to PATH. Open a new terminal and verify with "adb version".
+
+"Expected exactly one authorized device, found 0"
+    No authorized phone is available. Check the USB cable, unlock the phone, enable USB debugging, accept the authorization prompt, and rerun "adb devices -l".
+
+"Expected exactly one authorized device" with more than one device listed
+    Use --serial DEVICE_SERIAL to select the intended phone. Confirm the serial carefully before scanning or removal.
+
+"APK pull failed" or partial coverage
+    Some Android versions or work-managed devices restrict APK access. Review the warning in the report. MAFKit does not bypass those restrictions or root the device.
+
+"Manifest/certificate parsing failed: No module named androguard"
+    This is an optional parser limitation. Install Androguard with "python -m pip install androguard" and rerun the scan if appropriate.
+
+No report files were created
+    Confirm the command exited successfully and the output directory is writable. Check whether the selected device was authorized. MAFKit writes reports after a scan completes.
+
+MORE INFORMATION
+----------------
+Detailed scanner notes and setup information are in PHONE_SCANNER.md.
