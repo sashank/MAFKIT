@@ -25,6 +25,7 @@ MAFKit operates under a strict evidentiary model: **it never executes the APK**.
 - [Output Artifacts & Sample Reports](#output-artifacts--sample-reports)
 - [Development & Testing](#development--testing)
 - [Forensic Standards & Evidentiary Defensibility](#forensic-standards--evidentiary-defensibility)
+- [Project Roadmap](ROADMAP.md)
 
 ---
 
