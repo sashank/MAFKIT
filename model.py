@@ -1,8 +1,15 @@
-from dataclasses import dataclass, field, asdict
+"""Data models representing forensic findings and analysis reports."""
+
+from __future__ import annotations
+
+from dataclasses import asdict, dataclass, field
 from typing import Any
+
 
 @dataclass
 class Finding:
+    """An individual forensic finding or indicator discovered during analysis."""
+
     severity: str
     category: str
     title: str
@@ -11,8 +18,11 @@ class Finding:
     confidence: str = "high"
     evidence_id: str = ""
 
+
 @dataclass
 class Report:
+    """Comprehensive forensic report aggregating static, unpacking, and correlation evidence."""
+
     input_file: str
     version: str = "3.1-forensic-review"
     analysis: dict[str, Any] = field(default_factory=dict)
@@ -37,7 +47,8 @@ class Report:
     device_evidence: dict[str, Any] = field(default_factory=dict)
     correlation: dict[str, Any] = field(default_factory=dict)
 
-    def to_dict(self):
+    def to_dict(self) -> dict[str, Any]:
+        """Convert report dataclass and nested findings to plain dictionary."""
         d = asdict(self)
         d["findings"] = [asdict(f) for f in self.findings]
         return d
