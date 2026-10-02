@@ -1,0 +1,882 @@
+{
+  "version": "2.0",
+  "hashes": {
+    "md5": "d54a6aa258ef1265ad6faac3afe41da2",
+    "sha1": "19218c1d221ad15d7cab2561c7c6a469fe0ced0f",
+    "sha256": "dd373a6c97d919fb41d41dd4a82a13c7de261178571ce0e6560bbbb47da14182"
+  },
+  "package": {},
+  "packer": {
+    "detected": true,
+    "family": "DPT Shell",
+    "evidence": [
+      "assets/OoooooOooo",
+      "assets/d_shell_data_001",
+      "ProxyApplication/libdpt.so"
+    ],
+    "recovered_dex": [
+      {
+        "name": "classes.dex",
+        "size": 1571844,
+        "offset": 9116,
+        "path": "/mnt/data/mafkit_v2_test/recovered/dpt/original/classes.dex"
+      },
+      {
+        "name": "classes2.dex",
+        "size": 1604744,
+        "offset": 9116,
+        "path": "/mnt/data/mafkit_v2_test/recovered/dpt/original/classes2.dex"
+      },
+      {
+        "name": "classes3.dex",
+        "size": 1462540,
+        "offset": 9116,
+        "path": "/mnt/data/mafkit_v2_test/recovered/dpt/original/classes3.dex"
+      },
+      {
+        "name": "classes4.dex",
+        "size": 1546716,
+        "offset": 9116,
+        "path": "/mnt/data/mafkit_v2_test/recovered/dpt/original/classes4.dex"
+      },
+      {
+        "name": "classes5.dex",
+        "size": 25212,
+        "offset": 9116,
+        "path": "/mnt/data/mafkit_v2_test/recovered/dpt/original/classes5.dex"
+      }
+    ],
+    "method_restoration": {
+      "restored": true,
+      "store_version": 2,
+      "dex_sections": 4,
+      "total_methods_restored": 10750,
+      "dexes": [
+        {
+          "dex": "classes.dex",
+          "records": 2584,
+          "patched": 2584,
+          "unpatched": 0,
+          "path": "/mnt/data/mafkit_v2_test/recovered/dpt/restored/classes.dex"
+        },
+        {
+          "dex": "classes2.dex",
+          "records": 2587,
+          "patched": 2587,
+          "unpatched": 0,
+          "path": "/mnt/data/mafkit_v2_test/recovered/dpt/restored/classes2.dex"
+        },
+        {
+          "dex": "classes3.dex",
+          "records": 2856,
+          "patched": 2856,
+          "unpatched": 0,
+          "path": "/mnt/data/mafkit_v2_test/recovered/dpt/restored/classes3.dex"
+        },
+        {
+          "dex": "classes4.dex",
+          "records": 2723,
+          "patched": 2723,
+          "unpatched": 0,
+          "path": "/mnt/data/mafkit_v2_test/recovered/dpt/restored/classes4.dex"
+        }
+      ]
+    }
+  },
+  "capabilities": {
+    "accessibility": {
+      "detected": true,
+      "evidence": [
+        "AccessibilityService",
+        "onAccessibilityEvent",
+        "performGlobalAction",
+        "GestureDescription",
+        "findAccessibilityNodeInfosByText",
+        "findAccessibilityNodeInfosByViewId",
+        "canPerformGestures",
+        "canRetrieveWindowContent"
+      ]
+    },
+    "sms": {
+      "detected": true,
+      "evidence": [
+        "SmsManager",
+        "SmsMessage",
+        "Telephony$Sms",
+        "READ_SMS"
+      ]
+    },
+    "device_admin": {
+      "detected": true,
+      "evidence": [
+        "DeviceAdminReceiver"
+      ]
+    },
+    "screen_capture": {
+      "detected": true,
+      "evidence": [
+        "MediaProjection",
+        "MediaProjectionManager",
+        "takeScreenshot",
+        "ScreenshotResult",
+        "ImageReader"
+      ]
+    },
+    "websocket": {
+      "detected": true,
+      "evidence": [
+        "WebSocket",
+        "onMessage"
+      ]
+    },
+    "shell": {
+      "detected": true,
+      "evidence": [
+        "ProcessBuilder",
+        "telnet",
+        "ssh"
+      ]
+    },
+    "file_transfer": {
+      "detected": true,
+      "evidence": [
+        "download"
+      ]
+    },
+    "overlay_injection": {
+      "detected": true,
+      "evidence": [
+        "ject",
+        "overlay",
+        "rckey"
+      ]
+    },
+    "persistence": {
+      "detected": true,
+      "evidence": [
+        "BOOT_COMPLETED",
+        "QUICKBOOT_POWERON",
+        "startForegroundService"
+      ]
+    }
+  },
+  "iocs": {
+    "urls": [
+      "http://schemas.android.com/apk/res/android",
+      "https://android.googlesource.com/toolchain/llvm-project",
+      "http://schemas.android.com/apk/res-auto",
+      "https://issuetracker.google.com/issues/new?component=413107&template=1096568",
+      "https://developer.android.com/training/articles/direct-boot",
+      "https://youtrack.jetbrains.com/issue/KT-46465",
+      "https://publicsuffix.org/list/public_suffix_list.dat",
+      "https://mozilla.org/MPL/2.0/",
+      "http://www.apache.org/licenses/LICENSE-2.0",
+      "http://schemas.android.com/aapt",
+      "http://fsf.org/",
+      "http://www.gnu.org/licenses/",
+      "http://www.gnu.org/philosophy/why-not-lgpl.html",
+      "http://www.apache.org/licenses/",
+      "https://github.com/arthenica/ffmpeg-kit/wiki/Source",
+      "http://checkip.amazonaws.com",
+      "https://api.ipify.org",
+      "https://icanhazip.com",
+      "https://ifconfig.me/ip",
+      "https://www.google.com/",
+      "https://www.bing.com/",
+      "https://www.youtube.com/",
+      "https://www.facebook.com/",
+      "https://www.twitter.com/",
+      "https://play.google.com/",
+      "ws://127.0.0.1:8080/"
+    ],
+    "domains": [
+      "schemas.android.com",
+      "android.intent.category.INFO",
+      "androidx.work",
+      "88androidx.work",
+      "55androidx.work",
+      "NNandroidx.work",
+      "LLandroidx.work",
+      "KKandroidx.work",
+      "android.net",
+      "GGandroidx.work",
+      "77androidx.work",
+      "22androidx.work",
+      "c.Cc",
+      "b.IO",
+      "d.in",
+      "a.Cc",
+      "c.cc",
+      "android.googlesource.com",
+      "android.app",
+      "Dispatchers.IO",
+      "6androidx.work",
+      "Wandroidx.work",
+      "Gandroidx.work",
+      "openssh.com",
+      "current.work",
+      "kotlinx.coroutines.io",
+      "javax.net",
+      "4org.apache.commons.net",
+      "org.apache.commons.net",
+      "apache.commons.net",
+      "org.openjsse.net",
+      "7androidx.work",
+      "2androidx.work",
+      "com.android.org",
+      "com.google.android.gms.org",
+      "java.net",
+      "issuetracker.google.com",
+      "developer.android.com",
+      "Pandroidx.work",
+      "java.io",
+      "jcraft.com",
+      "libcore.io",
+      "whois.internic.net",
+      "youtrack.jetbrains.com",
+      "publicsuffix.org",
+      "mozilla.org",
+      "www.apache.org",
+      "66androidx.appcompat.app",
+      "androidx.fragment.app",
+      "fsf.org",
+      "www.gnu.org",
+      "x265.com",
+      "github.com",
+      "arthenica.com",
+      "ShapeAppearanceOverlay.Material3.Corner.Top",
+      "TextAppearance.Compat.Notification.Info",
+      "doubleclick.net",
+      "adservice.google.com",
+      "googlesyndication.com",
+      "google.com",
+      "youtube.com",
+      "checkip.amazonaws.com",
+      "api.ipify.org",
+      "icanhazip.com",
+      "ifconfig.me",
+      "www.google.com",
+      "www.bing.com",
+      "www.youtube.com",
+      "www.facebook.com",
+      "www.twitter.com",
+      "skin.info",
+      "droid.app",
+      "com.sec.android.app",
+      "play.google.com"
+    ],
+    "ipv4": [
+      "127.0.0.1",
+      "0.0.0.0",
+      "0.0.39.113",
+      "121.0.0.0",
+      "113.0.0.0",
+      "120.0.0.0"
+    ]
+  },
+  "attack_mapping": [
+    {
+      "capability": "accessibility",
+      "tactic": "Collection / Credential Access",
+      "behavior": "Input/UI capture and automated interaction",
+      "evidence": [
+        "AccessibilityService",
+        "onAccessibilityEvent",
+        "performGlobalAction",
+        "GestureDescription",
+        "findAccessibilityNodeInfosByText",
+        "findAccessibilityNodeInfosByViewId",
+        "canPerformGestures",
+        "canRetrieveWindowContent"
+      ]
+    },
+    {
+      "capability": "sms",
+      "tactic": "Collection",
+      "behavior": "SMS/message collection or manipulation",
+      "evidence": [
+        "SmsManager",
+        "SmsMessage",
+        "Telephony$Sms",
+        "READ_SMS"
+      ]
+    },
+    {
+      "capability": "device_admin",
+      "tactic": "Persistence / Defense Evasion",
+      "behavior": "Elevated device administration",
+      "evidence": [
+        "DeviceAdminReceiver"
+      ]
+    },
+    {
+      "capability": "screen_capture",
+      "tactic": "Collection",
+      "behavior": "Screen capture",
+      "evidence": [
+        "MediaProjection",
+        "MediaProjectionManager",
+        "takeScreenshot",
+        "ScreenshotResult",
+        "ImageReader"
+      ]
+    },
+    {
+      "capability": "websocket",
+      "tactic": "Command and Control",
+      "behavior": "Bidirectional application-layer channel",
+      "evidence": [
+        "WebSocket",
+        "onMessage"
+      ]
+    },
+    {
+      "capability": "shell",
+      "tactic": "Execution",
+      "behavior": "Command or shell execution",
+      "evidence": [
+        "ProcessBuilder",
+        "telnet",
+        "ssh"
+      ]
+    },
+    {
+      "capability": "file_transfer",
+      "tactic": "Collection / Exfiltration",
+      "behavior": "File collection and transfer",
+      "evidence": [
+        "download"
+      ]
+    },
+    {
+      "capability": "overlay_injection",
+      "tactic": "Credential Access",
+      "behavior": "Phishing/overlay injection",
+      "evidence": [
+        "ject",
+        "overlay",
+        "rckey"
+      ]
+    },
+    {
+      "capability": "persistence",
+      "tactic": "Persistence",
+      "behavior": "Boot/background-service persistence",
+      "evidence": [
+        "BOOT_COMPLETED",
+        "QUICKBOOT_POWERON",
+        "startForegroundService"
+      ]
+    }
+  ],
+  "limitations": [
+    "Manifest/certificate parsing failed: No module named 'androguard'"
+  ],
+  "deep_summary": {
+    "xor_hits": 4079,
+    "operational_strings": [
+      {
+        "value": "android.app.action.ADD_DEVICE_ADMIN",
+        "method": "Lcinder/yonder/nature/RequestAdm;->onCreate(Landroid/os/Bundle;)V",
+        "score": 1.25
+      },
+      {
+        "value": "android.app.extra.DEVICE_ADMIN",
+        "method": "Lcinder/yonder/nature/RequestAdm;->onCreate(Landroid/os/Bundle;)V",
+        "score": 1.25
+      },
+      {
+        "value": "smsto",
+        "method": "Lcinder/yonder/nature/Response;->a(Landroid/content/Intent;)V",
+        "score": 1.25
+      },
+      {
+        "value": "com.samsung.accessibility.installed_service",
+        "method": "Lcinder/yonder/nature/admcmjgi$d;->OK()V",
+        "score": 1.25
+      },
+      {
+        "value": "android.settings.ACCESSIBILITY_SETTINGS",
+        "method": "Lcinder/yonder/nature/admcmjgi$d;->OK()V",
+        "score": 1.25
+      },
+      {
+        "value": "AdBlock",
+        "method": "Lcinder/yonder/nature/alsygodo$e;->shouldOverrideUrlLoading(Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "Blocked redirect to ad host:",
+        "method": "Lcinder/yonder/nature/alsygodo$e;->shouldOverrideUrlLoading(Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "Deviceid",
+        "method": "Lcinder/yonder/nature/alsygodo;->n(Landroid/content/Context;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Slr_client",
+        "method": "Lcinder/yonder/nature/alsygodo;->n(Landroid/content/Context;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Client Exit.",
+        "method": "Lcinder/yonder/nature/alsygodo;->j()V",
+        "score": 1.25
+      },
+      {
+        "value": "Closing WebSocket",
+        "method": "Lcinder/yonder/nature/alsygodo;->j()V",
+        "score": 1.25
+      },
+      {
+        "value": "App.ACT.CLONE",
+        "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$i$b;->run()V",
+        "score": 1.0
+      },
+      {
+        "value": "chat",
+        "method": "Lcinder/yonder/nature/frcitsfolssodkki$a;->sendit(Ljava/lang/String;)V",
+        "score": 1.0
+      },
+      {
+        "value": "screen",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->f(Landroid/content/Context;)V",
+        "score": 1.25
+      },
+      {
+        "value": "iScreenCap",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onClosing(Lokhttp3/WebSocket;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "WebSocket closing:",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onClosing(Lokhttp3/WebSocket;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Max WebSocket retries reached, not reconnecting",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onClosing(Lokhttp3/WebSocket;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "WebSocket failure:",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onFailure(Lokhttp3/WebSocket;Ljava/lang/Throwable;Lokhttp3/Response;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Unauthorized access",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onMessage(Lokhttp3/WebSocket;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "WebSocket opened",
+        "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onOpen(Lokhttp3/WebSocket;Lokhttp3/Response;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Fast Download",
+        "method": "Lcinder/yonder/nature/h0;->b(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "File not found",
+        "method": "Lcinder/yonder/nature/h0;->b(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Executed. Result:",
+        "method": "Lcinder/yonder/nature/jnvkpuphxm$c;->a(Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "File Chooser",
+        "method": "Lcinder/yonder/nature/jnvkpuphxm$d;->onShowFileChooser(Landroid/webkit/WebView;Landroid/webkit/ValueCallback;Landroid/webkit/WebChromeClient$FileChooserParams;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "starturl",
+        "method": "Lcinder/yonder/nature/nletxnbyktwfgtqzy;->onStartCommand(Landroid/content/Intent;II)I",
+        "score": 1.25
+      },
+      {
+        "value": "onPause: User navigated away, but screen is still on.",
+        "method": "Lcinder/yonder/nature/oyezmsejxrsgqqohbr;->onPause()V",
+        "score": 1.25
+      },
+      {
+        "value": "onPause: Detected screen off!",
+        "method": "Lcinder/yonder/nature/oyezmsejxrsgqqohbr;->onPause()V",
+        "score": 1.25
+      },
+      {
+        "value": "SMS",
+        "method": "Lcinder/yonder/nature/p0$b;-><clinit>()V",
+        "score": 1.25
+      },
+      {
+        "value": "SMSCALLS",
+        "method": "Lcinder/yonder/nature/p0;-><clinit>()V",
+        "score": 1.25
+      },
+      {
+        "value": "SMSCALLS/",
+        "method": "Lcinder/yonder/nature/p0;->a(Lcinder/yonder/nature/p0$b;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Files",
+        "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V",
+        "score": 1.25
+      },
+      {
+        "value": "Camera",
+        "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V",
+        "score": 1.25
+      },
+      {
+        "value": "Screen",
+        "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V",
+        "score": 1.25
+      },
+      {
+        "value": "Deviceinfo",
+        "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V",
+        "score": 1.25
+      },
+      {
+        "value": "Recorder",
+        "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V",
+        "score": 1.0
+      },
+      {
+        "value": "clipboard",
+        "method": "Lcinder/yonder/nature/r0$d;->run()V",
+        "score": 1.0
+      },
+      {
+        "value": "file",
+        "method": "Lcinder/yonder/nature/r0;->S0(Ljava/lang/String;)Ljava/lang/String;",
+        "score": 1.25
+      },
+      {
+        "value": "New Notifications",
+        "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Post Notification",
+        "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "notification permission is not granted",
+        "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "android.permission.POST_NOTIFICATIONS",
+        "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "android.app.role.SMS",
+        "method": "Lcinder/yonder/nature/r0;->j0(Landroid/content/Context;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "device_policy",
+        "method": "Lcinder/yonder/nature/r0;->k0(Landroid/content/Context;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "screensaver_enabled",
+        "method": "Lcinder/yonder/nature/r0;->o0(Landroid/content/Context;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "screensaver_components",
+        "method": "Lcinder/yonder/nature/r0;->o0(Landroid/content/Context;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "notification",
+        "method": "Lcinder/yonder/nature/r0;->p(Landroid/content/Context;Ljava/lang/Class;)V",
+        "score": 1.25
+      },
+      {
+        "value": "localhost",
+        "method": "Lcinder/yonder/nature/r0;->r0(I)Z",
+        "score": 1.25
+      },
+      {
+        "value": "android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION",
+        "method": "Lcinder/yonder/nature/sktdpnqaf;->n(Landroid/content/Context;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "android.settings.USAGE_ACCESS_SETTINGS",
+        "method": "Lcinder/yonder/nature/sktdpnqaf;->t(Landroid/content/Context;)Z",
+        "score": 1.25
+      },
+      {
+        "value": "HOST_UNREACHABLE:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/h70;-><init>(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "AUTH_FAILED_OR_NO_SHELL_PROMPT",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/h70;->b(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "[ERROR] Invalid URL:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->B(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Host:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->C(Ljava/net/URL;I)V",
+        "score": 1.25
+      },
+      {
+        "value": "Content-Type: application/x-www-form-urlencoded",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->C(Ljava/net/URL;I)V",
+        "score": 1.232
+      },
+      {
+        "value": "deviceId=",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->k(I)Ljava/lang/String;",
+        "score": 1.25
+      },
+      {
+        "value": "application/x-www-form-urlencoded",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->q(Ljava/net/URL;I)V",
+        "score": 1.25
+      },
+      {
+        "value": "Error log sent to server successfully. Server Response:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Failed to send error log to server. Response Code:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": ". Server Response:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Error while sending error log to server",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "android.permission.RECORD_AUDIO",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/ot$a$a;->c(IILandroid/media/AudioRecord;I)Landroid/media/AudioRecord;",
+        "score": 1.0
+      },
+      {
+        "value": "purl",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->g(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "logserver",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->g(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Requested URL:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V",
+        "score": 1.25
+      },
+      {
+        "value": "clientIpAddress:",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V",
+        "score": 1.25
+      },
+      {
+        "value": "Error closing client socket",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V",
+        "score": 1.25
+      },
+      {
+        "value": "Error handling client request",
+        "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V",
+        "score": 1.25
+      },
+      {
+        "value": "PatternUnlock",
+        "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$b;->onCancelled(Landroid/accessibilityservice/GestureDescription;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Clonecheck",
+        "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$i;->run()V",
+        "score": 1.0
+      },
+      {
+        "value": "filehash",
+        "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "filedata",
+        "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Upload",
+        "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "HandleUpload",
+        "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "clip",
+        "method": "Lcinder/yonder/nature/e0$a;->C(Lorg/json/JSONObject;)V",
+        "score": 1.0
+      },
+      {
+        "value": "Handleclipboard",
+        "method": "Lcinder/yonder/nature/e0$a;->C(Lorg/json/JSONObject;)V",
+        "score": 1.0
+      },
+      {
+        "value": "miner",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "fetch",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.0
+      },
+      {
+        "value": "clone",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.0
+      },
+      {
+        "value": "lock",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "upload",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "dadmin",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Rec_Notifications",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "notifications",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "livescreen",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "ping.onPostExecute",
+        "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "injection",
+        "method": "Lcinder/yonder/nature/e0$a;->E(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Removed inject data",
+        "method": "Lcinder/yonder/nature/e0$a;->E(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "no injections add",
+        "method": "Lcinder/yonder/nature/e0$a;->E(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Auto unlock",
+        "method": "Lcinder/yonder/nature/e0$a;->G(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Accessibility service not enabled",
+        "method": "Lcinder/yonder/nature/e0$a;->G(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Handlescreenread",
+        "method": "Lcinder/yonder/nature/e0$a;->I(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "json livechat",
+        "method": "Lcinder/yonder/nature/e0$a;->P(Ljava/lang/String;)V",
+        "score": 1.0
+      },
+      {
+        "value": "File reconstructed:",
+        "method": "Lcinder/yonder/nature/e0$a;->S(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "reconstructFile",
+        "method": "Lcinder/yonder/nature/e0$a;->S(Ljava/lang/String;Ljava/lang/String;)V",
+        "score": 1.25
+      },
+      {
+        "value": "turl",
+        "method": "Lcinder/yonder/nature/e0$a;->g(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "miner not active",
+        "method": "Lcinder/yonder/nature/e0$a;->h(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "miner already active",
+        "method": "Lcinder/yonder/nature/e0$a;->h(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "HandMiners",
+        "method": "Lcinder/yonder/nature/e0$a;->h(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Device admin",
+        "method": "Lcinder/yonder/nature/e0$a;->j(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      },
+      {
+        "value": "Device admin is enabled.",
+        "method": "Lcinder/yonder/nature/e0$a;->j(Lorg/json/JSONObject;)V",
+        "score": 1.25
+      }
+    ],
+    "graph_nodes": 252,
+    "graph_edges": 220
+  }
+}

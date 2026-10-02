@@ -1,0 +1,314 @@
+{"type": "finding", "severity": "critical", "category": "capability", "title": "Accessibility control", "evidence": ["AccessibilityService", "onAccessibilityEvent", "performGlobalAction", "GestureDescription", "findAccessibilityNodeInfosByText", "findAccessibilityNodeInfosByViewId", "canPerformGestures", "canRetrieveWindowContent"], "interpretation": "Accessibility APIs can inspect UI and automate gestures when the service is enabled.", "confidence": "medium"}
+{"type": "finding", "severity": "critical", "category": "capability", "title": "SMS manipulation", "evidence": ["SmsManager", "SmsMessage", "Telephony$Sms", "READ_SMS"], "interpretation": "SMS APIs are present and may support OTP/message interception or sending.", "confidence": "medium"}
+{"type": "finding", "severity": "high", "category": "capability", "title": "Device administrator", "evidence": ["DeviceAdminReceiver"], "interpretation": "Device-admin APIs can increase persistence/control.", "confidence": "medium"}
+{"type": "finding", "severity": "critical", "category": "capability", "title": "Screen capture", "evidence": ["MediaProjection", "MediaProjectionManager", "takeScreenshot", "ScreenshotResult", "ImageReader"], "interpretation": "MediaProjection/screenshot APIs support remote screen observation.", "confidence": "medium"}
+{"type": "finding", "severity": "high", "category": "capability", "title": "Persistent remote channel", "evidence": ["WebSocket", "onMessage"], "interpretation": "WebSocket code can support bidirectional command-and-control.", "confidence": "medium"}
+{"type": "finding", "severity": "critical", "category": "capability", "title": "Remote/system command execution", "evidence": ["ProcessBuilder", "telnet", "ssh"], "interpretation": "Shell/process primitives may allow command execution.", "confidence": "medium"}
+{"type": "finding", "severity": "high", "category": "capability", "title": "File transfer", "evidence": ["download"], "interpretation": "Upload/download primitives can support file theft or delivery.", "confidence": "medium"}
+{"type": "finding", "severity": "critical", "category": "capability", "title": "Overlay/injection", "evidence": ["ject", "overlay", "rckey"], "interpretation": "Injection/overlay configuration can support credential theft or banking overlays.", "confidence": "medium"}
+{"type": "finding", "severity": "high", "category": "capability", "title": "Persistence", "evidence": ["BOOT_COMPLETED", "QUICKBOOT_POWERON", "startForegroundService"], "interpretation": "Boot/start-service logic can maintain malware availability.", "confidence": "medium"}
+{"type": "finding", "severity": "high", "category": "packer", "title": "Code packing/protection detected", "evidence": ["assets/OoooooOooo", "assets/d_shell_data_001", "ProxyApplication/libdpt.so"], "interpretation": "Packing can conceal executable logic and configuration from ordinary decompilation.", "confidence": "high"}
+{"type": "finding", "severity": "high", "category": "deobfuscation", "title": "Hidden operational strings recovered", "evidence": ["android.app.action.ADD_DEVICE_ADMIN", "android.app.extra.DEVICE_ADMIN", "smsto", "AdBlock", "Blocked redirect to ad host: ", "Closing WebSocket", "screen", "iScreenCap", "WebSocket closing: ", "Max WebSocket retries reached, not reconnecting", "iScreenCap", "WebSocket failure: ", "Max WebSocket retries reached, not reconnecting", "iScreenCap", "WebSocket opened", "Fast Download", "Fast Download", "Fast Download", "Closing WebSocket", "onPause: User navigated away, but screen is still on.", "onPause: Detected screen off!", "SMS", "SMSCALLS", "SMSCALLS/", "SMS", "Camera", "Screen", "android.app.role.SMS", "screensaver_enabled", "screensaver_components", "AUTH_FAILED_OR_NO_SHELL_PROMPT", "PatternUnlock", "PatternUnlock", "Upload", "HandleUpload", "lock", "upload", "screen", "dadmin", "livescreen"], "interpretation": "Statically recovered strings expose behavior or command vocabulary that was concealed in packed bytecode.", "confidence": "high"}
+{"type": "deobfuscated_string", "value": "android.app.action.ADD_DEVICE_ADMIN", "method": "Lcinder/yonder/nature/RequestAdm;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.app.extra.DEVICE_ADMIN", "method": "Lcinder/yonder/nature/RequestAdm;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "smsto", "method": "Lcinder/yonder/nature/Response;->a(Landroid/content/Intent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.samsung.accessibility.installed_service", "method": "Lcinder/yonder/nature/admcmjgi$d;->OK()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.settings.ACCESSIBILITY_SETTINGS", "method": "Lcinder/yonder/nature/admcmjgi$d;->OK()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "AdBlock", "method": "Lcinder/yonder/nature/alsygodo$e;->shouldOverrideUrlLoading(Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Blocked redirect to ad host:", "method": "Lcinder/yonder/nature/alsygodo$e;->shouldOverrideUrlLoading(Landroid/webkit/WebView;Landroid/webkit/WebResourceRequest;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Deviceid", "method": "Lcinder/yonder/nature/alsygodo;->n(Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Slr_client", "method": "Lcinder/yonder/nature/alsygodo;->n(Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Client Exit.", "method": "Lcinder/yonder/nature/alsygodo;->j()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Closing WebSocket", "method": "Lcinder/yonder/nature/alsygodo;->j()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "App.ACT.CLONE", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$i$b;->run()V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "chat", "method": "Lcinder/yonder/nature/frcitsfolssodkki$a;->sendit(Ljava/lang/String;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "screen", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->f(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "iScreenCap", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onClosing(Lokhttp3/WebSocket;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "WebSocket closing:", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onClosing(Lokhttp3/WebSocket;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Max WebSocket retries reached, not reconnecting", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onClosing(Lokhttp3/WebSocket;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "WebSocket failure:", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onFailure(Lokhttp3/WebSocket;Ljava/lang/Throwable;Lokhttp3/Response;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Unauthorized access", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onMessage(Lokhttp3/WebSocket;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "WebSocket opened", "method": "Lcinder/yonder/nature/gtzwsszrkrla$a;->onOpen(Lokhttp3/WebSocket;Lokhttp3/Response;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Fast Download", "method": "Lcinder/yonder/nature/h0;->b(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "File not found", "method": "Lcinder/yonder/nature/h0;->b(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Executed. Result:", "method": "Lcinder/yonder/nature/jnvkpuphxm$c;->a(Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "File Chooser", "method": "Lcinder/yonder/nature/jnvkpuphxm$d;->onShowFileChooser(Landroid/webkit/WebView;Landroid/webkit/ValueCallback;Landroid/webkit/WebChromeClient$FileChooserParams;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "starturl", "method": "Lcinder/yonder/nature/nletxnbyktwfgtqzy;->onStartCommand(Landroid/content/Intent;II)I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "onPause: User navigated away, but screen is still on.", "method": "Lcinder/yonder/nature/oyezmsejxrsgqqohbr;->onPause()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "onPause: Detected screen off!", "method": "Lcinder/yonder/nature/oyezmsejxrsgqqohbr;->onPause()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "SMS", "method": "Lcinder/yonder/nature/p0$b;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "SMSCALLS", "method": "Lcinder/yonder/nature/p0;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "SMSCALLS/", "method": "Lcinder/yonder/nature/p0;->a(Lcinder/yonder/nature/p0$b;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Files", "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Camera", "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Screen", "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Deviceinfo", "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Recorder", "method": "Lcinder/yonder/nature/qagjbqetagadke$c;-><clinit>()V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "clipboard", "method": "Lcinder/yonder/nature/r0$d;->run()V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "file", "method": "Lcinder/yonder/nature/r0;->S0(Ljava/lang/String;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "New Notifications", "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Post Notification", "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "notification permission is not granted", "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.POST_NOTIFICATIONS", "method": "Lcinder/yonder/nature/r0;->d(Landroid/content/Context;Ljava/lang/String;Ljava/lang/String;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.app.role.SMS", "method": "Lcinder/yonder/nature/r0;->j0(Landroid/content/Context;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "device_policy", "method": "Lcinder/yonder/nature/r0;->k0(Landroid/content/Context;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "screensaver_enabled", "method": "Lcinder/yonder/nature/r0;->o0(Landroid/content/Context;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "screensaver_components", "method": "Lcinder/yonder/nature/r0;->o0(Landroid/content/Context;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "notification", "method": "Lcinder/yonder/nature/r0;->p(Landroid/content/Context;Ljava/lang/Class;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "localhost", "method": "Lcinder/yonder/nature/r0;->r0(I)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.settings.MANAGE_APP_ALL_FILES_ACCESS_PERMISSION", "method": "Lcinder/yonder/nature/sktdpnqaf;->n(Landroid/content/Context;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.settings.USAGE_ACCESS_SETTINGS", "method": "Lcinder/yonder/nature/sktdpnqaf;->t(Landroid/content/Context;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HOST_UNREACHABLE:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/h70;-><init>(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "AUTH_FAILED_OR_NO_SHELL_PROMPT", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/h70;->b(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "[ERROR] Invalid URL:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->B(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Host:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->C(Ljava/net/URL;I)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Content-Type: application/x-www-form-urlencoded", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->C(Ljava/net/URL;I)V", "score": 1.232}
+{"type": "deobfuscated_string", "value": "deviceId=", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->k(I)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "application/x-www-form-urlencoded", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/he;->q(Ljava/net/URL;I)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error log sent to server successfully. Server Response:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Failed to send error log to server. Response Code:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": ". Server Response:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error while sending error log to server", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/iu;->b(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.RECORD_AUDIO", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/ot$a$a;->c(IILandroid/media/AudioRecord;I)Landroid/media/AudioRecord;", "score": 1.0}
+{"type": "deobfuscated_string", "value": "purl", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->g(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "logserver", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->g(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Requested URL:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "clientIpAddress:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error closing client socket", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error handling client request", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/w00;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "PatternUnlock", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$b;->onCancelled(Landroid/accessibilityservice/GestureDescription;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Clonecheck", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$i;->run()V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "filehash", "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "filedata", "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Upload", "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HandleUpload", "method": "Lcinder/yonder/nature/e0$a;->A(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "clip", "method": "Lcinder/yonder/nature/e0$a;->C(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "Handleclipboard", "method": "Lcinder/yonder/nature/e0$a;->C(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "miner", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "fetch", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "clone", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "lock", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "upload", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "dadmin", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Rec_Notifications", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "notifications", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "livescreen", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "ping.onPostExecute", "method": "Lcinder/yonder/nature/e0$a;->D(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "injection", "method": "Lcinder/yonder/nature/e0$a;->E(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Removed inject data", "method": "Lcinder/yonder/nature/e0$a;->E(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "no injections add", "method": "Lcinder/yonder/nature/e0$a;->E(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Auto unlock", "method": "Lcinder/yonder/nature/e0$a;->G(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Accessibility service not enabled", "method": "Lcinder/yonder/nature/e0$a;->G(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Handlescreenread", "method": "Lcinder/yonder/nature/e0$a;->I(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "json livechat", "method": "Lcinder/yonder/nature/e0$a;->P(Ljava/lang/String;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "File reconstructed:", "method": "Lcinder/yonder/nature/e0$a;->S(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "reconstructFile", "method": "Lcinder/yonder/nature/e0$a;->S(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "turl", "method": "Lcinder/yonder/nature/e0$a;->g(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "miner not active", "method": "Lcinder/yonder/nature/e0$a;->h(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "miner already active", "method": "Lcinder/yonder/nature/e0$a;->h(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HandMiners", "method": "Lcinder/yonder/nature/e0$a;->h(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Device admin", "method": "Lcinder/yonder/nature/e0$a;->j(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Device admin is enabled.", "method": "Lcinder/yonder/nature/e0$a;->j(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HandleAdmin", "method": "Lcinder/yonder/nature/e0$a;->j(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "SMS Blocker", "method": "Lcinder/yonder/nature/e0$a;->k(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "All saved SMS removed", "method": "Lcinder/yonder/nature/e0$a;->k(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Calls Blocker", "method": "Lcinder/yonder/nature/e0$a;->k(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "smsg", "method": "Lcinder/yonder/nature/e0$a;->k(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HandleBlocker", "method": "Lcinder/yonder/nature/e0$a;->k(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Clone ERROR", "method": "Lcinder/yonder/nature/e0$a;->o(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "Clone App", "method": "Lcinder/yonder/nature/e0$a;->o(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "HandleClone", "method": "Lcinder/yonder/nature/e0$a;->o(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "Downloads", "method": "Lcinder/yonder/nature/e0$a;->p(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "File not found:", "method": "Lcinder/yonder/nature/e0$a;->p(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HandleFetch", "method": "Lcinder/yonder/nature/e0$a;->p(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "Copy File", "method": "Lcinder/yonder/nature/e0$a;->q(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Move File", "method": "Lcinder/yonder/nature/e0$a;->q(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Microphone", "method": "Lcinder/yonder/nature/e0$a;->s(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Microphone Permission is not Enabled.", "method": "Lcinder/yonder/nature/e0$a;->s(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "ERROR: network shell Closed", "method": "Lcinder/yonder/nature/e0$a;->t(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "ERROR: network shell not initialized", "method": "Lcinder/yonder/nature/e0$a;->t(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "host", "method": "Lcinder/yonder/nature/e0$a;->t(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "ERROR: host/user missing", "method": "Lcinder/yonder/nature/e0$a;->t(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "block", "method": "Lcinder/yonder/nature/e0$a;->v(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "blockstate", "method": "Lcinder/yonder/nature/e0$a;->v(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HandleScreen", "method": "Lcinder/yonder/nature/e0$a;->v(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "File Finder", "method": "Lcinder/yonder/nature/e0$a;->w(Lorg/json/JSONObject;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Terminal", "method": "Lcinder/yonder/nature/e0$a;->x(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "HandleTerminal", "method": "Lcinder/yonder/nature/e0$a;->x(Lorg/json/JSONObject;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "onMessage LiveChat:", "method": "Lcinder/yonder/nature/e0$a;->onMessage(Lokhttp3/WebSocket;Ljava/lang/String;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "ServerSay:", "method": "Lcinder/yonder/nature/e0;->v(Ljava/lang/String;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Access", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "FileS", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.ACCESS_FINE_LOCATION", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.ACCESS_COARSE_LOCATION", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Access Location Permission is Disabled.", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Keylogger is ON", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Accessibility Services Disabled", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Keylogger is OFF", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "keylogs", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Record Removed:", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "Notifications", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "This phone does not support silent screen shot", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Live Screen", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Open File", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Access file permission is disabled.", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "unBlocked App:", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Blocked App:", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "UnLocked..", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Locked..", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Access Contacts Permission is Disabled", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Access SMS Permission is Disabled.", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Unknown command", "method": "Lcinder/yonder/nature/e0;->e(Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/mu;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "screencap", "method": "Lcinder/yonder/nature/gtzwsszrkrla$b;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "LiveScreen", "method": "Lcinder/yonder/nature/gtzwsszrkrla$c;->onImageAvailable(Landroid/media/ImageReader;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "ScreenCaptureImageReader", "method": "Lcinder/yonder/nature/gtzwsszrkrla;->D()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Closing Screen", "method": "Lcinder/yonder/nature/gtzwsszrkrla;->U()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "At.start.ScreenCap", "method": "Lcinder/yonder/nature/gtzwsszrkrla;->onStartCommand(Landroid/content/Intent;II)I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Can't find Device id", "method": "Lcinder/yonder/nature/gtzwsszrkrla;->onStartCommand(Landroid/content/Intent;II)I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.READ_SMS", "method": "Lcinder/yonder/nature/i0;->a(Landroid/content/Context;)[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.SEND_SMS", "method": "Lcinder/yonder/nature/i0;->a(Landroid/content/Context;)[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.CAMERA", "method": "Lcinder/yonder/nature/i0;->a(Landroid/content/Context;)[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.WAKE_LOCK", "method": "Lcinder/yonder/nature/i0;->a(Landroid/content/Context;)[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Downloading...", "method": "Lcinder/yonder/nature/jnvkpuphxm$a;->onDownloadStart(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "download", "method": "Lcinder/yonder/nature/jnvkpuphxm$a;->onDownloadStart(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Downloading file...", "method": "Lcinder/yonder/nature/jnvkpuphxm$a;->onDownloadStart(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Download manager unavailable", "method": "Lcinder/yonder/nature/jnvkpuphxm$a;->onDownloadStart(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Download failed:", "method": "Lcinder/yonder/nature/jnvkpuphxm$a;->onDownloadStart(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;J)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "file://", "method": "Lcinder/yonder/nature/mgkklvmzyfhhy;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Camera start fail", "method": "Lcinder/yonder/nature/ppberzfeprkh;->onStartCommand(Landroid/content/Intent;II)I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Camera in use By another App", "method": "Lcinder/yonder/nature/ppberzfeprkh;->onStartCommand(Landroid/content/Intent;II)I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "createoverlay", "method": "Lcinder/yonder/nature/qagjbqetagadke;->A(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "removeoverlay", "method": "Lcinder/yonder/nature/qagjbqetagadke;->R()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "At.JoinChat", "method": "Lcinder/yonder/nature/qagjbqetagadke;->b(Landroid/content/Context;)V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "WebSocket connection closed:", "method": "Lcinder/yonder/nature/r0$b;->onClosed(Lokhttp3/WebSocket;ILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "WebSocket connection error:", "method": "Lcinder/yonder/nature/r0$b;->onFailure(Lokhttp3/WebSocket;Ljava/lang/Throwable;Lokhttp3/Response;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "WebSocket connection established", "method": "Lcinder/yonder/nature/r0$b;->onOpen(Lokhttp3/WebSocket;Lokhttp3/Response;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error executing open link:", "method": "Lcinder/yonder/nature/u$g;->a(Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Execution stopped.", "method": "Lcinder/yonder/nature/u$k;->a(Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.intent.action.SCREEN_ON", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/i50;->a()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.intent.action.SCREEN_OFF", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/i50;->a()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error accepting client connection", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/nu;->b(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error closing server socket", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/nu;->c()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "$url$", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/q80;->e(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;IILjava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Clone", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/rf0;-><clinit>()V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "files", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/rf0;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "screen_brightness", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/z30;->a()I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Screen brightness setting not found:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/z30;->a()I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "screen_off_timeout", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/z30;->b()I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Screen timeout setting not found:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/z30;->b()I", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Unable to set screen brightness:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/z30;->g(I)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Unable to set screen timeout:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/z30;->h(I)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "extra_url", "method": "Lcinder/yonder/nature/DownloadForegroundService;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "extra_file_name", "method": "Lcinder/yonder/nature/DownloadForegroundService;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "download_channel_id", "method": "Lcinder/yonder/nature/DownloadForegroundService;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Downloader", "method": "Lcinder/yonder/nature/DownloadForegroundService;->d(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Download failed: HTTP", "method": "Lcinder/yonder/nature/DownloadForegroundService;->d(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Download error:", "method": "Lcinder/yonder/nature/DownloadForegroundService;->d(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Download cancelled", "method": "Lcinder/yonder/nature/DownloadForegroundService;->d(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Download complete", "method": "Lcinder/yonder/nature/DownloadForegroundService;->d(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:camera", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:post_notification", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:wake_lock", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:access_restricted_settings", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:turn_screen_on", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:post_notification allow", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android:use_full_screen_intent allow", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "cmd deviceidle whitelist +", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "dumpsys deviceidle whitelist +", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "cmd device_config put privacy camera_mic_icons_enabled false default", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "BIND_ACCESSIBILITY_SERVICE allow", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "settings put secure enabled_accessibility_services \"", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "settings put secure accessibility_enabled 1", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "/.MyDeviceAdminReceiver", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "dpm set-active-admin", "method": "Lcinder/yonder/nature/Splasher;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.samsung.accessibility", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$j;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.samsung.accessibility:id/collapsing_appbar_extended_title", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$j;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "work profile", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$j;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "reset accessibility settings", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor$j;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "uploading:", "method": "Lcinder/yonder/nature/e0$d;->c()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Server stop", "method": "Lcinder/yonder/nature/e0$d;->onMessage(Lokhttp3/WebSocket;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "SmsReceiver", "method": "Lcinder/yonder/nature/frlzvwhmezglq;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.provider.Telephony.SMS_DELIVER", "method": "Lcinder/yonder/nature/frlzvwhmezglq;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.provider.Telephony.SMS_RECEIVED", "method": "Lcinder/yonder/nature/frlzvwhmezglq;->onReceive(Landroid/content/Context;Landroid/content/Intent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "this app does not support emulator devices", "method": "Lcinder/yonder/nature/jnvkpuphxm;->e()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Failed to decode or execute JavaScript", "method": "Lcinder/yonder/nature/jnvkpuphxm;->i(Landroid/webkit/WebView;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Exception while reading miner output", "method": "Lcinder/yonder/nature/minserv$b;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "de.ludetis.monerominer.action.START_MINING", "method": "Lcinder/yonder/nature/minserv;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "de.ludetis.monerominer.action.STOP_MINING", "method": "Lcinder/yonder/nature/minserv;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "miner exited", "method": "Lcinder/yonder/nature/minserv;->k()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error stopping previous miner process", "method": "Lcinder/yonder/nature/minserv;->n(Lcinder/yonder/nature/minserv$a;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Exception while starting miner:", "method": "Lcinder/yonder/nature/minserv;->n(Lcinder/yonder/nature/minserv$a;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error start miner, check logs for info", "method": "Lcinder/yonder/nature/minserv;->n(Lcinder/yonder/nature/minserv$a;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error copying native miner libraries", "method": "Lcinder/yonder/nature/minserv;->onCreate()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "cover", "method": "Lcinder/yonder/nature/o0$a;->b(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.settings.action.MANAGE_OVERLAY_PERMISSION", "method": "Lcinder/yonder/nature/rftuygldkqfhqd;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Exec Error:", "method": "Lcinder/yonder/nature/s0;->c(Ljava/lang/String;I)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "tofront", "method": "Lcinder/yonder/nature/s;->O(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Accessibility", "method": "Lcinder/yonder/nature/s;->V(Landroid/content/Context;Z)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "accessibility", "method": "Lcinder/yonder/nature/s;->c0(Ljava/lang/String;[Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Lock Screen", "method": "Lcinder/yonder/nature/s;->d0()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "blockBack", "method": "Lcinder/yonder/nature/s;->i0()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "requestDefaultSms exception", "method": "Lcinder/yonder/nature/tjcbswyyuio;->b()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "User canceled / denied default SMS change", "method": "Lcinder/yonder/nature/tjcbswyyuio;->onActivityResult(IILandroid/content/Intent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.ACCESS_NETWORK_STATE", "method": "Lcinder/yonder/nature/uojskpvqn;->a()[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.permission.ACCESS_WIFI_STATE", "method": "Lcinder/yonder/nature/uojskpvqn;->a()[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "CustomFilesFilter", "method": "Lcinder/yonder/nature/w;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Record", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.0}
+{"type": "deobfuscated_string", "value": "Overlays", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "access", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.android.chrome:id/url_", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "org.mozilla.firefox:id/url_", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "url_bar", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "url_field", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "url", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/cc;-><clinit>()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "camera", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/ej;-><init>(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "enabled_accessibility_services", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/fu;->b(Landroid/content/Context;Ljava/lang/Class;)Z", "score": 1.25}
+{"type": "deobfuscated_string", "value": "StrictHostKeyChecking", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/y40;-><init>(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "shell", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/y40;-><init>(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "hostkey", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/y40;-><init>(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HOSTKEY_ERROR:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/y40;-><init>(Ljava/lang/String;ILjava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "p:WifiLock", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/yc0;->a(Landroid/content/Context;ZZ)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "LockType: Unknown", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->M(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Lock PIN ,Saved:", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->M(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "LockType: Password , Pass:", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->M(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.android.systemui:id/lockPatternView", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->Q(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.android.systemui:id/vivo_lock_pattern_view", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->Q(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "com.android.settings.accessibility.AccessibilitySettings", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->v(Ljava/lang/String;Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "[cover]", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "[tofront]", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "[lock]", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "] attempt to access disabled app :", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "At.acc.BlockedApps", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "capturedUrl:", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": ">URL:", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onAccessibilityEvent(Landroid/view/accessibility/AccessibilityEvent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "ACCESS", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onInterrupt()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "BTAccess", "method": "Lcinder/yonder/nature/cjtykwcnotvyjqzmeor;->onRebind(Landroid/content/Intent;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HomeSmsung", "method": "Lcinder/yonder/nature/csnjgxkqlqe;->p()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Updating home screen", "method": "Lcinder/yonder/nature/csnjgxkqlqe;->z()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Administrador de aplicaciones", "method": "Lcinder/yonder/nature/csnjgxkqlqe;->z()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Unfortunately, this version is not compatible with your device", "method": "Lcinder/yonder/nature/csnjgxkqlqe;->onCreate(Landroid/os/Bundle;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "filepath", "method": "Lcinder/yonder/nature/e0$d$a;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "filename", "method": "Lcinder/yonder/nature/e0$d$a;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "WebSocket queue stuck, abort attempt", "method": "Lcinder/yonder/nature/e0$d$a;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "client abort, will retry", "method": "Lcinder/yonder/nature/e0$d$a;->run()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Lock mobile", "method": "Lcinder/yonder/nature/lvygqedmig$d;->OK(Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "bsms", "method": "Lcinder/yonder/nature/qagjbqetagadke$d;->e(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "content://sms/inbox", "method": "Lcinder/yonder/nature/t0;->a(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error loading SMS:", "method": "Lcinder/yonder/nature/t0;->a(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "content://sms/sent", "method": "Lcinder/yonder/nature/t0;->a(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "content://sms/", "method": "Lcinder/yonder/nature/t0;->a(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Invalid command:", "method": "Lcinder/yonder/nature/u;->h(Ljava/util/List;II)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "execution aborted by user.", "method": "Lcinder/yonder/nature/u;->a()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Proxy server started on port", "method": "Lcinder/yonder/nature/waottlbqferbkwnzx;->b(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Error starting proxy server", "method": "Lcinder/yonder/nature/waottlbqferbkwnzx;->b(Landroid/content/Context;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "onDestroy  proxy server", "method": "Lcinder/yonder/nature/waottlbqferbkwnzx;->onDestroy()V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "device_name", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/jf;->a(Landroid/content/Context;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "DEVICE:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/jf;->b(Landroid/content/Context;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "HOST:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/jf;->b(Landroid/content/Context;)Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "• [Screen]", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/jf;->b(Landroid/content/Context;)Ljava/lang/String;", "score": 1.205}
+{"type": "deobfuscated_string", "value": "android.settings.CHANNEL_NOTIFICATION_SETTINGS", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/lu;->c(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;)Landroid/content/Intent;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "android.settings.APP_NOTIFICATION_SETTINGS", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/lu;->c(Ljava/lang/String;Ljava/lang/String;Landroid/content/Context;)Landroid/content/Intent;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Screenshots", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/qf0;->c(Landroid/content/Context;Ljava/lang/String;)[Ljava/lang/String;", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Source file does not exist:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/qf0;->g(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "Failed to delete the original file after copying:", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/qf0;->o(Ljava/lang/String;Ljava/lang/String;)V", "score": 1.25}
+{"type": "deobfuscated_string", "value": "file opened.", "method": "Ltwloqwoewwirqiccs/yowebzumcugcjvwa/bxrmjdinunqaitecs/vyxyixxmxuifrel/qf0;->p(Landroid/content/Context;Ljava/lang/String;)Ljava/lang/String;", "score": 1.25}

@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68", "wheel"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "mafkit"
+version = "3.1.0"
+description = "Repeatable Android APK forensic analysis, deep unpacking, ADB acquisition, USB phone scanner and incident correlation toolkit"
+readme = "README.md"
+requires-python = ">=3.10"
+dependencies = [
+    "androguard>=4.1.2",
+    "cryptography>=42.0.0",
+]
+
+[project.scripts]
+mafkit = "mafkit.cli:main"
+
+[tool.setuptools.packages.find]
+where = ["src"]
+include = ["mafkit*"]
+
+[tool.pytest.ini_options]
+pythonpath = ["src"]
+testpaths = ["tests"]
+addopts = "-ra"

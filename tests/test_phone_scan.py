@@ -1,13 +1,13 @@
-import importlib
-import sys
+"""Unit tests for USB phone scanner functionality."""
+
+from __future__ import annotations
+
 import tempfile
 import unittest
 from pathlib import Path
 from unittest.mock import patch
 
-PROJECT_ROOT = Path(__file__).resolve().parents[1]
-sys.path.insert(0, str(PROJECT_ROOT.parent))
-scanner = importlib.import_module(f'{PROJECT_ROOT.name}.phone_scan')
+from mafkit import phone_scan as scanner
 
 
 class PhoneScanTests(unittest.TestCase):
@@ -51,12 +51,20 @@ class PhoneScanTests(unittest.TestCase):
         )
         self.assertEqual(result['score'], 75)
         self.assertEqual(result['band'], 'Review')
-        self.assertEqual([factor['name'] for factor in result['factors']],
-                         ['android.permission.CAMERA', 'accessibility_service'])
+        self.assertEqual(
+            [factor['name'] for factor in result['factors']],
+            ['android.permission.CAMERA', 'accessibility_service'],
+        )
 
     @patch.object(scanner, '_static_scan', return_value={
-        'sha256': 'a' * 64, 'size_bytes': 3, 'capabilities': {}, 'findings': [], 'packed': False,
-        'packer': {}, 'iocs': {}, 'limitations': [],
+        'sha256': 'a' * 64,
+        'size_bytes': 3,
+        'capabilities': {},
+        'findings': [],
+        'packed': False,
+        'packer': {},
+        'iocs': {},
+        'limitations': [],
     })
     @patch.object(scanner, '_run')
     @patch.object(scanner.shutil, 'which', return_value='/usr/bin/adb')
