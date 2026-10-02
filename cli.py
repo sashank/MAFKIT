@@ -1,4 +1,4 @@
-"""Command-line interface for MAFKit: static analysis, deep unpacking, and ADB correlation."""
+"""Command-line interface for MAFKit: static analysis, deep unpacking, ADB correlation, and phone scanning."""
 
 from __future__ import annotations
 
@@ -23,9 +23,18 @@ from .forensic import (
     validate_package_name,
 )
 from .model import Finding, Report
+from .phone_scan import scan_phone, uninstall_user_app
 from .plugins.dpt import DPTPlugin
 from .reporting import write_html, write_json, write_markdown
 from .util import DOMAIN_RE, IP_RE, URL_RE, WS_RE, uniq
+
+
+def _positive_int(value: str) -> int:
+    """Validate positive integer argument for CLI."""
+    number = int(value)
+    if number < 1:
+        raise argparse.ArgumentTypeError('must be at least 1')
+    return number
 
 
 def _enrich_iocs(report: Report, strings: list[str]) -> None:
@@ -252,13 +261,14 @@ def analyze(args: argparse.Namespace) -> Report:
 
 
 def main(argv: Sequence[str] | None = None) -> None:
-    """Main CLI entrypoint supporting `analyze` and `collect-adb` subcommands."""
+    """Main CLI entrypoint supporting `analyze`, `collect-adb`, `scan-phone`, and `remove-app` subcommands."""
     p = argparse.ArgumentParser(
         prog='mafkit',
-        description='MAFKit v3.1 — forensic-reviewed APK analysis plus Android/ADB evidence correlation',
+        description='MAFKit — static APK analysis, USB phone security scanning, and ADB evidence correlation',
     )
     sub = p.add_subparsers(dest='command')
 
+    # analyze
     a = sub.add_parser('analyze', help='Analyze APK and optionally correlate ADB evidence')
     a.add_argument('apk', type=Path, help='Path to target APK file')
     a.add_argument('-o', '--out', type=Path, default=Path('mafkit-output'), help='Output directory')
@@ -270,6 +280,7 @@ def main(argv: Sequence[str] | None = None) -> None:
     a.add_argument('--case-id', help='Case identifier for chain of custody and reporting')
     a.add_argument('--examiner', help='Examiner name or callsign')
 
+    # collect-adb
     c = sub.add_parser('collect-adb', help='Non-destructive ADB evidence collection from one authorized Android device')
     c.add_argument('-o', '--out', type=Path, default=Path('adb-acquisition'), help='Output directory')
     c.add_argument('--package', help='Target package name for focused dumpsys/APK pull')
@@ -277,8 +288,20 @@ def main(argv: Sequence[str] | None = None) -> None:
     c.add_argument('--case-id', help='Case identifier')
     c.add_argument('--examiner', help='Examiner name')
 
+    # scan-phone
+    s = sub.add_parser('scan-phone', help='Scan installed Android apps over USB ADB and write per-app safety reports')
+    s.add_argument('-o', '--out', type=Path, default=Path('phone-scan-output'), help='Output directory')
+    s.add_argument('--serial', help='ADB serial when selecting among connected devices')
+    s.add_argument('--third-party-only', action='store_true', help='Skip system apps')
+    s.add_argument('--max-apps', type=_positive_int, help='Limit the number of apps (useful for a quick test)')
+
+    # remove-app
+    r = sub.add_parser('remove-app', help='Interactively remove one confirmed third-party app for Android user 0')
+    r.add_argument('package', help='Exact Android package name to remove')
+    r.add_argument('--serial', help='ADB serial when selecting among connected devices')
+
     raw = sys.argv[1:] if argv is None else list(argv)
-    if raw and raw[0] not in ('analyze', 'collect-adb', '-h', '--help'):
+    if raw and raw[0] not in ('analyze', 'collect-adb', 'scan-phone', 'remove-app', '-h', '--help'):
         raw = ['analyze', *raw]
 
     args = p.parse_args(raw)
@@ -296,6 +319,32 @@ def main(argv: Sequence[str] | None = None) -> None:
             'commands': len(manifest['commands']),
             'manifest': 'collection_manifest.json',
         }, indent=2))
+        return
+
+    if args.command == 'scan-phone':
+        try:
+            result = scan_phone(
+                args.out,
+                args.serial,
+                not args.third_party_only,
+                args.max_apps,
+            )
+        except (RuntimeError, ValueError) as exc:
+            raise SystemExit(str(exc)) from exc
+        print(json.dumps({
+            'output': str(args.out.resolve()),
+            'apps_scanned': result['apps_scanned'],
+            'markdown': 'phone_scan.md',
+            'json': 'phone_scan.json',
+            'device': result['selected_device']['serial'],
+        }, indent=2))
+        return
+
+    if args.command == 'remove-app':
+        try:
+            print(uninstall_user_app(args.package, args.serial))
+        except (RuntimeError, ValueError) as exc:
+            raise SystemExit(str(exc)) from exc
         return
 
     if args.command == 'analyze':

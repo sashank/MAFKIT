@@ -365,3 +365,149 @@ small {{ color: #666; }}
 </html>"""
 
     path.write_text(body, encoding='utf-8')
+
+
+def write_phone_scan_markdown(result: dict[str, Any], path: Path) -> None:
+    """Generate Markdown report for USB phone safety scan."""
+    apps = result.get('apps', [])
+    lines: list[str] = [
+        '# MAFKit USB Phone Safety Scan',
+        '',
+        '> Static, non-root ADB scan. Scores are heuristic indicators, not malware verdicts or guarantees of safety.',
+        '',
+        '## Scan Summary',
+        '',
+        f"- **Started (UTC):** `{result.get('scan_started_utc', '')}`",
+        f"- **Completed (UTC):** `{result.get('scan_completed_utc', '')}`",
+        f"- **Device serial:** `{result.get('selected_device', {}).get('serial', '')}`",
+        f"- **Applications scanned:** {result.get('apps_scanned', len(apps))}",
+        f"- **System applications included:** {'Yes' if result.get('include_system_apps') else 'No'}",
+        '',
+        'The score runs from 0 to 100; higher means fewer risk indicators were observed. '
+        'A high score does not prove an app is safe. Unscanned APKs and inaccessible private app data are not covered.',
+        '',
+        '## App Overview',
+        '',
+        '| Score | Assessment | Coverage | Package | App source | Granted sensitive permissions |',
+        '|---:|---|---|---|---|---|',
+    ]
+
+    for app in apps:
+        safety = app.get('safety', {})
+        granted = (
+            ', '.join(
+                p.removeprefix('android.permission.')
+                for p in app.get('granted_permissions', [])
+            )
+            or 'None observed'
+        )
+        source = app.get('installer') or ('System image' if app.get('system_app') else 'Unknown')
+        lines.append(
+            f"| {safety.get('score', 'N/A')} | {_md_escape(safety.get('band', 'Not scored'))} | "
+            f"{app.get('coverage', 'unknown')} | `{_md_escape(app.get('package', ''))}` | "
+            f"`{_md_escape(source)}` | {_md_escape(granted)} |"
+        )
+
+    for app in apps:
+        safety = app.get('safety', {})
+        lines.extend([
+            '',
+            f"## {_md_escape(app.get('package', 'Unknown package'))}",
+            '',
+            f"- **Score:** {safety.get('score', 'N/A')}/100, {safety.get('band', 'Not scored')}",
+            f"- **Coverage:** {app.get('coverage', 'unknown')}",
+            f"- **Install source:** `{_md_escape(app.get('installer') or 'unknown')}`",
+            f"- **UID:** `{app.get('uid', 'unknown')}`",
+            f"- **APK files scanned:** {len(app.get('static_analysis', []))} of {len(app.get('apks', []))} pulled",
+            f"- **Accessibility service active:** {'Yes' if app.get('accessibility_service_active') else 'No evidence observed'}",
+            f"- **Device administrator active:** {'Yes' if app.get('device_admin_active') else 'No evidence observed'}",
+            '',
+            '### Permissions',
+            '',
+            '| Permission | State | Risk note |',
+            '|---|---|---|',
+        ])
+        grants = set(app.get('granted_permissions', []))
+        known = set(app.get('permission_grants_known', []))
+        from .phone_scan import PERMISSION_RISK
+
+        for permission in app.get('requested_permissions', []):
+            if permission in grants:
+                state = 'Granted'
+            elif permission in known:
+                state = 'Not granted'
+            else:
+                state = 'Requested; grant state unavailable'
+            risk = PERMISSION_RISK.get(permission)
+            note = risk[1] if risk else 'No elevated weighting in this scanner'
+            lines.append(f"| `{_md_escape(permission)}` | {state} | {_md_escape(note)} |")
+
+        if not app.get('requested_permissions'):
+            lines.append('| No requested permissions parsed | Unknown | Metadata may be incomplete |')
+
+        lines.extend(['', '### Risk factors', ''])
+        factors = safety.get('factors', [])
+        if factors:
+            for factor in factors:
+                lines.append(
+                    f"- **+{factor['points']} risk points** — `{_md_escape(factor['name'])}`: "
+                    f"{_md_escape(factor['detail'])}"
+                )
+        else:
+            lines.append('- No weighted risk indicators were observed in the collected metadata and APK contents.')
+
+        findings = app.get('findings', [])
+        if findings:
+            lines.extend(['', '### Static findings', ''])
+            for finding in findings:
+                ev = ', '.join(finding.get('evidence', [])) or 'No matched strings recorded'
+                lines.append(
+                    f"- **{finding.get('severity', 'info').upper()}** "
+                    f"{_md_escape(finding.get('title', 'Finding'))} "
+                    f"({finding.get('confidence', 'unknown')} confidence): `{_md_escape(ev)}`"
+                )
+
+        if app.get('apks'):
+            lines.extend(['', '### APK fingerprints', ''])
+            for apk in app['apks']:
+                lines.append(
+                    f"- `{_md_escape(apk['local_path'])}` — SHA-256 `{apk['sha256']}`, "
+                    f"{apk['size_bytes']:,} bytes"
+                )
+
+        if app.get('warnings'):
+            lines.extend(
+                ['', '### Coverage warnings', '']
+                + [f'- {_md_escape(warning)}' for warning in app['warnings']]
+            )
+
+    lines.extend([
+        '',
+        '## Scoring Guide',
+        '',
+        '- **85–100:** Low observed risk; not a safety certification.',
+        '- **65–84:** Review permissions and app purpose.',
+        '- **35–64:** Elevated; investigate before trusting.',
+        '- **0–34:** High; prioritize manual review and possible removal.',
+        '',
+        'Points are added for granted sensitive permissions, static API/string capabilities, '
+        'packed-code indicators, and active accessibility/device-admin state. A requested '
+        'permission that is not granted does not receive the granted-permission penalty. '
+        'Independent indicators can overlap; the result is intentionally conservative and explainable, '
+        'not a probability.',
+        '',
+        '## What This Scan Cannot See',
+        '',
+    ])
+    lines.extend(f'- {_md_escape(item)}' for item in result.get('limitations', []))
+    lines.extend([
+        '',
+        '## Suggested Response',
+        '',
+        'For an app you recognize and need, review its permissions and active special access in '
+        'Android Settings. For an app you judge unwanted, use `mafkit remove-app PACKAGE` to remove '
+        'it for Android user 0 after an exact-name confirmation; Android removes that user’s '
+        'private app data. The scanner does not automatically delete apps, files, or user data.',
+        '',
+    ])
+    path.write_text('\n'.join(lines), encoding='utf-8')
