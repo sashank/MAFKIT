@@ -2,7 +2,7 @@
 
 This document outlines the strategic product vision and technical milestones for **MAFKit** (**M**obile **A**PK + Android Device **F**orensic **Kit**). 
 
-The roadmap builds upon MAFKit's established static reverse engineering, unpacked bytecode recovery, and logical ADB triage foundation, expanding into **automated dynamic sandbox orchestration** and **comprehensive MITRE ATT&CK for Mobile matrix integration**.
+The roadmap builds upon MAFKit's established static reverse engineering, unpacked bytecode recovery, and logical ADB triage foundation, expanding into **automated dynamic sandbox orchestration**, **comprehensive MITRE ATT&CK for Mobile matrix integration**, and **courtroom-ready digital forensics (DFIR) defensibility**.
 
 ---
 
@@ -11,6 +11,7 @@ The roadmap builds upon MAFKit's established static reverse engineering, unpacke
 1. **Defensible Tri-Factor Forensics**: Seamlessly fuse static APK capabilities, dynamic sandbox telemetry, and physical handset artifacts into unified, cross-validated incident timelines.
 2. **Deterministic & Containable**: Maintain strict evidentiary provenance, repeatable execution, and zero-compromise host/network containment during analysis.
 3. **Standards-Aligned Intelligence**: Native integration with industry frameworks (MITRE ATT&CK Mobile, STIX 2.1, and MISP) for seamless SOC/IR and law enforcement workflow integration.
+4. **Courtroom Admissibility (ISO/IEC 27037 & NIST SP 800-86)**: Adhere to international standards for digital evidence collection, cryptographic chain of custody, and tamper-evident preservation.
 
 ---
 
@@ -25,6 +26,8 @@ The roadmap builds upon MAFKit's established static reverse engineering, unpacke
 │  Phase 3: Deep Packer Unpacking & Native Shared Object (.so) Analysis   │
 ├────────────────────────────────────────────────────────────────────────┤
 │  Phase 4: Threat Intelligence, Graph Visualization & Enterprise API    │
+├────────────────────────────────────────────────────────────────────────┤
+│  Phase 5: Digital Forensics, Chain of Custody & Judicial Defensibility │
 └────────────────────────────────────────────────────────────────────────┘
 ```
 
@@ -134,14 +137,65 @@ The roadmap builds upon MAFKit's established static reverse engineering, unpacke
 
 ---
 
+## Phase 5: Digital Forensics, Chain of Custody & Judicial Defensibility
+
+**Objective**: Align MAFKit outputs and acquisition methodologies with international digital forensics standards (**ISO/IEC 27037** and **NIST SP 800-86**) to withstand courtroom cross-examination.
+
+### 5.1 RFC 3161 Trusted Timestamping & Merkle Audit Logs
+- **Hardware/TSA Cryptographic Timestamping**:
+  - Support querying an RFC 3161 Timestamp Authority (TSA) over HTTP/TLS to generate detached cryptographic timestamp tokens for `collection_manifest.json`.
+  - Proves the exact existence and integrity of acquired evidence at a specific UTC second, rebutting allegations of post-hoc manipulation or clock tampering.
+- **Append-Only Merkle Audit Trail**:
+  - Maintain an append-only, HMAC/Merkle-chained audit log recording every executed tool command, environment variable, host system hash, and raw command response.
+
+### 5.2 Deep Storage Artifacts & SQLite WAL Recovery
+- **SQLite Write-Ahead Logging (`.wal`) Carving**:
+  - Carve uncommitted and deleted transaction records directly from SQLite `.db-wal` files and database free pages (e.g. recovering wiped SMS messages, deleted call logs, or cleared browser sessions).
+- **Rogue Certificate & VPN Interception Audit**:
+  - Inspect Android User Credential Stores (`/data/misc/user/0/cacerts-added/`) to detect rogue user root CAs installed for local TLS decryption.
+  - Audit active VPN network interfaces (`tun0`, `ppp0`) and private DNS resolver configurations (`dns_resolver`) to detect traffic diversion.
+- **Volatile Crash Artifacts**:
+  - Parse Android Application Not Responding (`/data/anr/traces.txt`) and native memory crash dumps (`/data/tombstones/`) to detect exploitation attempts, memory corruption, and abnormal termination.
+
+### 5.3 Unified Super-Timeline Generation (Plaso / Timesketch Compatibility)
+- **Chronological Evidence Fusion**:
+  - Compile all temporal artifacts into a standardized super-timeline:
+    - Application execution intervals (`dumpsys usagestats`)
+    - Task, window, and focus transitions (`dumpsys activity`)
+    - Notification arrival and dismissal (`dumpsys notification`)
+    - High-precision kernel and framework events (`logcat -v epoch`)
+    - Incident / fraud transaction timeline events
+- **Clock Drift & Skew Normalization**:
+  - Compute and document the offset between device RTC hardware time, carrier NITZ/NTP network time, and investigator workstation time to correct for deliberate or accidental clock skew.
+- **Forensic Tool Interoperability**:
+  - Export unified timelines in **Plaso (log2timeline)** and **Timesketch** JSON/CSV formats for collaborative case timeline exploration.
+
+### 5.4 Anti-Forensics & Tampering Detection
+- **Log Suppression & Eviction**: Flag anomalies such as wiped log buffers (`logcat -c`), missing audit intervals, or truncated system event logs.
+- **Self-Deletion Primitives**: Detect dropper evasion code designed to unregister components or delete source binaries (`rm /data/app/...`, `pm uninstall`).
+- **Timestomping Detection**: Cross-validate APK ZIP internal timestamp records against Android PackageManager `firstInstallTime`, `lastUpdateTime`, and ext4/f2fs filesystem `mtime`/`ctime`/`crtime`.
+- **Display Obfuscation**: Detect malicious `FLAG_SECURE` manipulation, transparent 1x1 overlay windows, and background `WAKE_LOCK` holding during deceptive fake screen-off states.
+
+### 5.5 CASE / UCO Forensic Ontology & Court-Ready Briefs
+- **CASE / UCO JSON-LD Export**:
+  - Export evidence graphs in **CASE (Cyber-investigation Analysis Standard Expression)** and **UCO (Unified Cyber Ontology)** formats for seamless import into lab platforms (Autopsy, Magnet AXIOM, Cellebrite).
+- **Courtroom-Ready Certified PDF Reports**:
+  - Export digitally signed, formal forensic reports formatted for judicial presentation:
+    - Formal separation of *Factual Observations*, *Automated Deductions*, and *Analyst Opinions*.
+    - Chain of custody certificate of completion with examiner identity, serial pinning details, and tool version digests.
+    - Technical reproducibility declaration.
+
+---
+
 ## Release Milestones & Target Versions
 
 | Version | Focus | Key Deliverables |
 | :---: | :--- | :--- |
-| **v3.2** | **Formal ATT&CK Mobile Integration** | Full ATT&CK Mobile technique mapping, Navigator JSON export, and STIX 2.1 bundles. |
+| **v3.2** | **Formal ATT&CK Mobile Integration** | Official ATT&CK Mobile technique IDs, Navigator JSON layer export, and STIX 2.1 bundles. |
 | **v3.3** | **Dynamic Sandbox Foundation** | Headless AVD orchestration, pcap network capture, and automated permission granting. |
-| **v3.4** | **Frida Runtime Instrumentation** | Memory DEX carving, crypto interception, and dynamic API call graphs. |
-| **v4.0** | **Multi-Packer & Enterprise Platform** | Multi-packer support (Qihoo/Bangcle), REST API, and multi-case campaign clustering. |
+| **v3.4** | **Frida Runtime Instrumentation** | Memory DEX carving, crypto key extraction, and dynamic API call graphs. |
+| **v3.5** | **Forensics & Chain of Custody (DFIR)** | RFC 3161 trusted timestamping, Plaso/Timesketch super-timeline, and SQLite WAL carving. |
+| **v4.0** | **Enterprise Platform & CASE/UCO** | Multi-packer support (Qihoo/Bangcle), CASE/UCO ontology export, REST API, and campaign clustering. |
 
 ---
 
