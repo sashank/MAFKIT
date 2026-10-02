@@ -247,10 +247,10 @@ The packed layer is important because the visible JADX output may not contain al
 
 ## Source Artifacts
 
-- [MAFKit report](mafkit-output/report.md)
-- [JSON report](mafkit-output/report.json)
-- [Behavior graph](mafkit-output/behavior_graph.json)
-- [Behavior graph DOT file](mafkit-output/behavior_graph.dot)
-- [Decompiled Android manifest](android-investigation/cinder/jadx-output/resources/AndroidManifest.xml)
-- [Accessibility configuration](android-investigation/cinder/jadx-output/resources/res/xml/xbvkxyar.xml)
-- [Network security configuration](android-investigation/cinder/jadx-output/resources/res/xml/network_security.xml)
+- [MAFKit Markdown Report](mafkit-output/report.md) (also available at [examples/sample-output-v3/report.md](../examples/sample-output-v3/report.md))
+- [JSON Report](mafkit-output/report.json) (also available at [examples/sample-output-v3/report.json](../examples/sample-output-v3/report.json))
+- [Behavior Graph (JSON)](mafkit-output/behavior_graph.json) (also available at [examples/sample-output-v3/behavior_graph.json](../examples/sample-output-v3/behavior_graph.json))
+- [Behavior Graph DOT File](mafkit-output/behavior_graph.dot) (also available at [examples/sample-output-v3/behavior_graph.dot](../examples/sample-output-v3/behavior_graph.dot))
+- Decompiled Android Manifest: generated via JADX decompilation (`jadx -d <out> base.apk`)
+- Accessibility Configuration: `res/xml/xbvkxyar.xml` (extracted from APK assets/resources)
+- Network Security Configuration: `res/xml/network_security.xml` (extracted from APK assets/resources)
