@@ -71,3 +71,76 @@ def write_html(report,path:Path):
     a=d.get('analysis',{}); prov=esc(json.dumps({'started_utc':a.get('started_utc'),'completed_utc':a.get('completed_utc'),'case_id':a.get('case_id'),'examiner':a.get('examiner'),'input_file':d.get('input_file'),'environment':a.get('environment',{})},indent=2))
     body=f'''<!doctype html><meta charset="utf-8"><title>MAFKit v3.1 Forensic Report</title><style>body{{font-family:Arial,sans-serif;max-width:1200px;margin:32px auto;line-height:1.45}}table{{border-collapse:collapse;width:100%;margin:12px 0 28px}}td,th{{border:1px solid #d6d6d6;padding:8px;vertical-align:top}}th{{background:#f0f0f0}}code,pre{{font-family:Consolas,monospace;white-space:pre-wrap;word-break:break-word}}.note{{padding:12px;background:#f4f6f8;border-left:4px solid #555}}small{{color:#666}}</style><h1>Mobile APK + Device Forensic Analysis Report — MAFKit v3.1</h1><div class="note">Automated static APK analysis plus optional logical/read-oriented ADB correlation. Technical indicators do not establish actor identity, intent, execution, or transaction causation without corroboration.</div><h2>Analysis Provenance</h2><pre>{prov}</pre><h2>Sample Identity</h2><ul>{hashes}{pkg}</ul><h2>Findings</h2><table><tr><th>Severity</th><th>Finding</th><th>Interpretation</th><th>Evidence</th></tr>{rows}</table>{dev}{corr}<h2>ATT&amp;CK-style Behavior Mapping</h2><table><tr><th>Tactic</th><th>Behavior</th><th>Capability</th></tr>{atk}</table><h2>Deep Deobfuscation</h2><p>Recovered {len(d.get('deobfuscation',{}).get('xor_hits',[]))} candidate repeating-XOR plaintext strings.</p><table><tr><th>Decoded string</th><th>Method</th><th>Score</th></tr>{xor}</table><h2>Candidate Indicators of Compromise</h2>{iocs}<p><i>Validate context and provenance before blocking or attribution.</i></p><h2>Limitations</h2><ul>{''.join('<li>'+esc(x)+'</li>' for x in d['limitations'] + d.get('device_evidence',{}).get('limitations',[]))}</ul>'''
     path.write_text(body,encoding='utf-8')
+
+
+def write_phone_scan_markdown(result:dict,path:Path):
+    apps=result.get('apps',[])
+    lines=['# MAFKit USB Phone Safety Scan','',
+           '> Static, non-root ADB scan. Scores are heuristic indicators, not malware verdicts or guarantees of safety.','',
+           '## Scan Summary','',
+           f"- **Started (UTC):** `{result.get('scan_started_utc','')}`",
+           f"- **Completed (UTC):** `{result.get('scan_completed_utc','')}`",
+           f"- **Device serial:** `{result.get('selected_device',{}).get('serial','')}`",
+           f"- **Applications scanned:** {result.get('apps_scanned',len(apps))}",
+           f"- **System applications included:** {'Yes' if result.get('include_system_apps') else 'No'}",'',
+           'The score runs from 0 to 100; higher means fewer risk indicators were observed. A high score does not prove an app is safe. Unscanned APKs and inaccessible private app data are not covered.','',
+           '## App Overview','',
+           '| Score | Assessment | Coverage | Package | App source | Granted sensitive permissions |',
+           '|---:|---|---|---|---|---|']
+    for app in apps:
+        safety=app.get('safety',{})
+        granted=', '.join(p.removeprefix('android.permission.') for p in app.get('granted_permissions',[])) or 'None observed'
+        source=app.get('installer') or ('System image' if app.get('system_app') else 'Unknown')
+        lines.append(f"| {safety.get('score','N/A')} | {_md_escape(safety.get('band','Not scored'))} | {app.get('coverage','unknown')} | `{_md_escape(app.get('package',''))}` | `{_md_escape(source)}` | {_md_escape(granted)} |")
+    for app in apps:
+        safety=app.get('safety',{})
+        lines += ['',f"## {_md_escape(app.get('package','Unknown package'))}",'',
+                  f"- **Score:** {safety.get('score','N/A')}/100, {safety.get('band','Not scored')}",
+                  f"- **Coverage:** {app.get('coverage','unknown')}",
+                  f"- **Install source:** `{_md_escape(app.get('installer') or 'unknown')}`",
+                  f"- **UID:** `{app.get('uid','unknown')}`",
+                  f"- **APK files scanned:** {len(app.get('static_analysis',[]))} of {len(app.get('apks',[]))} pulled",
+                  f"- **Accessibility service active:** {'Yes' if app.get('accessibility_service_active') else 'No evidence observed'}",
+                  f"- **Device administrator active:** {'Yes' if app.get('device_admin_active') else 'No evidence observed'}",'',
+                  '### Permissions','',
+                  '| Permission | State | Risk note |','|---|---|---|']
+        grants=set(app.get('granted_permissions',[]))
+        known=set(app.get('permission_grants_known',[]))
+        from .phone_scan import PERMISSION_RISK
+        for permission in app.get('requested_permissions',[]):
+            state='Granted' if permission in grants else 'Not granted' if permission in known else 'Requested; grant state unavailable'
+            risk=PERMISSION_RISK.get(permission)
+            note=risk[1] if risk else 'No elevated weighting in this scanner'
+            lines.append(f"| `{_md_escape(permission)}` | {state} | {_md_escape(note)} |")
+        if not app.get('requested_permissions'):
+            lines.append('| No requested permissions parsed | Unknown | Metadata may be incomplete |')
+        lines += ['', '### Risk factors','']
+        factors=safety.get('factors',[])
+        if factors:
+            for factor in factors:
+                lines.append(f"- **+{factor['points']} risk points** — `{_md_escape(factor['name'])}`: {_md_escape(factor['detail'])}")
+        else:
+            lines.append('- No weighted risk indicators were observed in the collected metadata and APK contents.')
+        findings=app.get('findings',[])
+        if findings:
+            lines += ['', '### Static findings','']
+            for finding in findings:
+                ev=', '.join(finding.get('evidence',[])) or 'No matched strings recorded'
+                lines.append(f"- **{finding.get('severity','info').upper()}** { _md_escape(finding.get('title','Finding')) } ({finding.get('confidence','unknown')} confidence): `{_md_escape(ev)}`")
+        if app.get('apks'):
+            lines += ['', '### APK fingerprints','']
+            for apk in app['apks']:
+                lines.append(f"- `{_md_escape(apk['local_path'])}` — SHA-256 `{apk['sha256']}`, {apk['size_bytes']:,} bytes")
+        if app.get('warnings'):
+            lines += ['', '### Coverage warnings','']+[f'- {_md_escape(warning)}' for warning in app['warnings']]
+    lines += ['', '## Scoring Guide','',
+              '- **85–100:** Low observed risk; not a safety certification.',
+              '- **65–84:** Review permissions and app purpose.',
+              '- **35–64:** Elevated; investigate before trusting.',
+              '- **0–34:** High; prioritize manual review and possible removal.', '',
+              'Points are added for granted sensitive permissions, static API/string capabilities, packed-code indicators, and active accessibility/device-admin state. A requested permission that is not granted does not receive the granted-permission penalty. Independent indicators can overlap; the result is intentionally conservative and explainable, not a probability.','',
+              '## What This Scan Cannot See','']
+    lines.extend(f'- {_md_escape(item)}' for item in result.get('limitations',[]))
+    lines += ['', '## Suggested Response','',
+              'For an app you recognize and need, review its permissions and active special access in Android Settings. For an app you judge unwanted, use `mafkit remove-app PACKAGE` to remove it for Android user 0 after an exact-name confirmation; Android removes that user’s private app data. The scanner does not automatically delete apps, files, or user data.','']
+    path.write_text('\n'.join(lines),encoding='utf-8')
